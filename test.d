@@ -86,7 +86,19 @@ int main()
     makeSymbolicLink("../../zlib/zconf.h", "output/zlib/zconf.h");
     makeSymbolicLink("../../zlib/zlib.h", "output/zlib/zlib.h");
 
+    // libpng
+    ensureDirectoryExists("output/libpng");
+    run([
+        "dstep",
+        "libpng/png.h",
+        "libpng/pngconf.h",
+        "libpng/pnglibconf.h",
+        "--package", "libpng",
+        "-Ilibpng",
+        resources,
+        "-o", "output"]);
 
+    makeSymbolicLink("../../libpng/png.h", "output/libpng/png.h");
 
 
     return 0;
