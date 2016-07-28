@@ -99,7 +99,22 @@ int main()
         "-o", "output"]);
 
     makeSymbolicLink("../../libpng/png.h", "output/libpng/png.h");
+    makeSymbolicLink("../../libpng/pngconf.h", "output/libpng/pngconf.h");
+    makeSymbolicLink("../../libpng/pnglibconf.h", "output/libpng/pnglibconf.h");
 
+    // jpeg-9b
+    ensureDirectoryExists("output/jpeg-9b");
+    run([
+        "dstep",
+        "jpeg-9b/jconfig.h",
+        "jpeg-9b/jpeglib.h",
+        "--package", "jpeg-9b",
+        "-Ijpeg-9b",
+        resources,
+        "-o", "output"]);
+
+    makeSymbolicLink("../../jpeg-9b/jconfig.h", "output/jpeg-9b/jconfig.h");
+    makeSymbolicLink("../../jpeg-9b/jpeglib.h", "output/jpeg-9b/jpeglib.h");
 
     return 0;
 
