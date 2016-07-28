@@ -20,6 +20,11 @@ void ensureDirectoryExists(string path)
         mkdirRecurse(path);
 }
 
+void makeSymbolicLink(string target, string link)
+{
+    execute(["ln", "-s", target, link]);
+}
+
 int main()
 {
     string resources = "-I../dstep/resources";
@@ -29,6 +34,27 @@ int main()
     run(["dstep", "fftw3/api/fftw3.h", resources, "-o", "output/fftw/fftw3.d"]);
     execute(["ln", "-s", "../../fftw3/api/fftw3.h", "output/fftw/fftw3.h"]);
 
+    // mathgl
+    ensureDirectoryExists("output/mathgl/include/mgl2");
+    run([
+        "dstep",
+        "mathgl/include/mgl2/base_cf.h",
+        "mathgl/include/mgl2/canvas_cf.h",
+        "mathgl/include/mgl2/datac_cf.h",
+        "mathgl/include/mgl2/data_cf.h",
+        "mathgl/include/mgl2/mgl_cf.h",
+        "--package", "mgl",
+        "-Imathgl/include",
+        "-std=c99",
+        resources,
+        "-o", "output",
+        "-Wno-typedef-redefinition"]);
+
+    makeSymbolicLink("../../../../mathgl/include/mgl2/base_cf.h", "output/mathgl/include/mgl2/base_cf.h");
+    makeSymbolicLink("../../../../mathgl/include/mgl2/canvas_cf.h", "output/mathgl/include/mgl2/canvas_cf.h");
+    makeSymbolicLink("../../../../mathgl/include/mgl2/datac_cf.h", "output/mathgl/include/mgl2/datac_cf.h");
+    makeSymbolicLink("../../../../mathgl/include/mgl2/data_cf.h", "output/mathgl/include/mgl2/data_cf.h");
+    makeSymbolicLink("../../../../mathgl/include/mgl2/mgl_cf.h", "output/mathgl/include/mgl2/mgl_cf.h");
 
     return 0;
 
