@@ -72,6 +72,22 @@ int main()
     makeSymbolicLink("../../../../glfw-3.2/include/GLFW/glfw3.h", "output/glfw-3.2/include/GLFW/glfw3.h");
     makeSymbolicLink("../../../../glfw-3.2/include/GLFW/glfw3native.h", "output/glfw-3.2/include/GLFW/glfw3native.h");
 
+    // zlib
+    ensureDirectoryExists("output/zlib");
+    run([
+        "dstep",
+        "zlib/zconf.h",
+        "zlib/zlib.h",
+        "--package", "zlib",
+        "-Izlib",
+        resources,
+        "-o", "output"]);
+
+    makeSymbolicLink("../../zlib/zconf.h", "output/zlib/zconf.h");
+    makeSymbolicLink("../../zlib/zlib.h", "output/zlib/zlib.h");
+
+
+
 
     return 0;
 
