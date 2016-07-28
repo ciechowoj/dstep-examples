@@ -43,6 +43,7 @@ int main()
         "mathgl/include/mgl2/datac_cf.h",
         "mathgl/include/mgl2/data_cf.h",
         "mathgl/include/mgl2/mgl_cf.h",
+        "mathgl/include/mgl2/abstract.h",
         "--package", "mgl",
         "-Imathgl/include",
         "-std=c99",
@@ -55,10 +56,26 @@ int main()
     makeSymbolicLink("../../../../mathgl/include/mgl2/datac_cf.h", "output/mathgl/include/mgl2/datac_cf.h");
     makeSymbolicLink("../../../../mathgl/include/mgl2/data_cf.h", "output/mathgl/include/mgl2/data_cf.h");
     makeSymbolicLink("../../../../mathgl/include/mgl2/mgl_cf.h", "output/mathgl/include/mgl2/mgl_cf.h");
+    makeSymbolicLink("../../../../mathgl/include/mgl2/abstract.h", "output/mathgl/include/mgl2/abstract.h");
+
+    // glfw-3.2
+    ensureDirectoryExists("output/glfw-3.2/include/GLFW");
+    run([
+        "dstep",
+        "glfw-3.2/include/GLFW/glfw3.h",
+        "glfw-3.2/include/GLFW/glfw3native.h",
+        "--package", "glfw3",
+        "-Iglfw-3.2/include",
+        resources,
+        "-o", "output"]);
+
+    makeSymbolicLink("../../../../glfw-3.2/include/GLFW/glfw3.h", "output/glfw-3.2/include/GLFW/glfw3.h");
+    makeSymbolicLink("../../../../glfw-3.2/include/GLFW/glfw3native.h", "output/glfw-3.2/include/GLFW/glfw3native.h");
+
 
     return 0;
 
-    // glfw3
+
     run(["dstep", "glfw/include/GLFW/glfw3.h", resources, "-Iglfw/include", "-o", "glfw3.d"]);
     run(["dstep", "glfw/include/GLFW/glfw3native.h", resources, "-Iglfw/include", "-o", "glfw3native.d"]);
 
