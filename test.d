@@ -116,24 +116,45 @@ int main()
     makeSymbolicLink("../../jpeg-9b/jconfig.h", "output/jpeg-9b/jconfig.h");
     makeSymbolicLink("../../jpeg-9b/jpeglib.h", "output/jpeg-9b/jpeglib.h");
 
-    return 0;
+    // v4l-utils
+    ensureDirectoryExists("output/v4l-utils");
+    run([
+        "dstep",
+        "v4l-utils/include/gettext.h",
+        "v4l-utils/include/linux/compiler.h",
+        "v4l-utils/include/linux/fb.h",
+        "v4l-utils/include/linux/ivtv.h",
+        "v4l-utils/include/linux/media-bus-format.h",
+        "v4l-utils/include/linux/media.h",
+        "v4l-utils/include/linux/v4l2-common.h",
+        "v4l-utils/include/linux/v4l2-controls.h",
+        "v4l-utils/include/linux/v4l2-mediabus.h",
+        "v4l-utils/include/linux/v4l2-subdev.h",
+        "v4l-utils/include/linux/videodev2.h",
+        "v4l-utils/include/linux/dvb/audio.h",
+        "v4l-utils/include/linux/dvb/dmx.h",
+        "v4l-utils/include/linux/dvb/frontend.h",
+        "v4l-utils/include/linux/dvb/video.h",
+        "--package", "v4l",
+        "-Iv4l-utils/include",
+        resources,
+        "-o", "output"]);
 
-
-    run(["dstep", "glfw/include/GLFW/glfw3.h", resources, "-Iglfw/include", "-o", "glfw3.d"]);
-    run(["dstep", "glfw/include/GLFW/glfw3native.h", resources, "-Iglfw/include", "-o", "glfw3native.d"]);
-
-    // jpeg-9b
-    run(["dstep", "jpeg-9b/jpeglib.h", "-Ijpeg-9b", "-o jpeglib.d", "-include", "/usr/include/stdio.h"]);
-
-    // libpng
-    run(["dstep", "libpng-1.6.23/png.h", resources, "-Ilibpng-1.6.23", "-I/usr/include", "-o", "png.d"]);
-
-    // sqlite3
-    run(["dstep", "sqlite-autoconf-3130000/sqlite3.h", resources, "-Isqlite-autoconf-3130000", "-o", "sqlite3.d"]);
-
-    // dvb
-    run(["dstep", "v4l-utils-1.10.1/include/linux/dvb/frontend.h", resources, "-o", "dvb/frontend.d"]);
-
+    makeSymbolicLink("../../../v4l-utils/include/gettext.h", "output/v4l-utils/include/gettext.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/compiler.h", "output/v4l-utils/include/linux/compiler.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/fb.h", "output/v4l-utils/include/linux/fb.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/ivtv.h", "output/v4l-utils/include/linux/ivtv.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/media-bus-format.h", "output/v4l-utils/include/linux/media-bus-format.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/media.h", "output/v4l-utils/include/linux/media.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/v4l2-common.h", "output/v4l-utils/include/linux/v4l2-common.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/v4l2-controls.h", "output/v4l-utils/include/linux/v4l2-controls.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/v4l2-mediabus.h", "output/v4l-utils/include/linux/v4l2-mediabus.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/v4l2-subdev.h", "output/v4l-utils/include/linux/v4l2-subdev.h");
+    makeSymbolicLink("../../../../v4l-utils/include/linux/videodev2.h", "output/v4l-utils/include/linux/videodev2.h");
+    makeSymbolicLink("../../../../../v4l-utils/include/linux/dvb/audio.h", "output/v4l-utils/include/linux/dvb/audio.h");
+    makeSymbolicLink("../../../../../v4l-utils/include/linux/dvb/dmx.h", "output/v4l-utils/include/linux/dvb/dmx.h");
+    makeSymbolicLink("../../../../../v4l-utils/include/linux/dvb/frontend.h", "output/v4l-utils/include/linux/dvb/frontend.h");
+    makeSymbolicLink("../../../../../v4l-utils/include/linux/dvb/video.h", "output/v4l-utils/include/linux/dvb/video.h");
 
     return 0;
 }
